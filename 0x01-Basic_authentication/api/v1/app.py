@@ -26,6 +26,13 @@ def unauthorized(error) -> tuple[str, Literal[401]]:
     """
     return jsonify({"error": "unauthorized"}), 401
 
+@app.errorhandler(403)
+def forbidden(error) -> str:
+    """ for a request where the user is authenticate but not allowed to
+    access to a resource? 403 of course!
+    """
+    return jsonify({"error": "Forbidden"}), 403
+
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")
